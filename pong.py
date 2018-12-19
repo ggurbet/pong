@@ -9,7 +9,7 @@ wn = turtle.Screen()
 wn.title("Pong")
 wn.bgcolor("#282c34")
 wn.setup(width = 800, height = 600)
-wn.tracer(0)
+wn.tracer(1000)
 
 # Player 1
 player1 = turtle.Turtle()
@@ -74,11 +74,9 @@ wn.onkeypress(player2_down, "Down")
 # Main loop
 while True:
     wn.update()
-
     # Move the ball
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
-
     # Check borders
     if ball.ycor() > 290:
         ball.sety(290) # do not go out of bounds
@@ -92,3 +90,10 @@ while True:
     if ball.xcor() < -390:
         ball.goto(0, 0) # ball is out
         ball.dx *= -1 # reverse direction
+    # Collisions between the ball and the paddles
+    if (ball.xcor() > 340 and \
+        ball.xcor() < 350) and \
+        (ball.ycor() < player2.ycor() + 50 and \
+        ball.ycor() > player2.ycor() - 50):
+        ball.dx *= -1
+        ball.setx(340)

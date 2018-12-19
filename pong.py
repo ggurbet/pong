@@ -1,6 +1,4 @@
-#!/usr/bin/env python
-# -*- coding: utf-8 -*-
-
+#!/usr/bin/python3.7
 # Pong
 # Gökhan Gurbetoğlu
 # @ggurbet
@@ -38,6 +36,34 @@ ball.shape("square")
 ball.color("#e9e9e9")
 ball.penup()
 ball.goto(0, 0)
+
+# Player Movements
+def player1_up():
+    y = player1.ycor()
+    y += 20
+    player1.sety(y)
+
+def player1_down():
+    y = player1.ycor()
+    y -= 20
+    player1.sety(y)
+
+def player2_up():
+    y = player2.ycor()
+    y += 20
+    player2.sety(y)
+
+def player2_down():
+    y = player2.ycor()
+    y -= 20
+    player2.sety(y)
+
+# Keyboard controls
+wn.listen()
+wn.onkeypress(player1_up, "w")
+wn.onkeypress(player1_down, "s")
+wn.onkeypress(player2_up, "Up")
+wn.onkeypress(player2_down, "Down")
 
 # Main loop
 while True:

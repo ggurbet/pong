@@ -12,10 +12,6 @@ wn.bgcolor("#282c34")
 wn.setup(width = 800, height = 600)
 wn.tracer(0)
 
-# Score
-score_1 = 0
-score_2 = 0
-
 # Player 1
 player1 = turtle.Turtle()
 player1.speed(0)
@@ -41,9 +37,12 @@ ball.shape("square")
 ball.color("#e9e9e9")
 ball.penup()
 ball.goto(0, 0)
-ball.dx = 0.1 # each move is 2 pixels horizontally
-ball.dy = 0.1 # each move is 2 pixels vertically
-# combined effect is diagonal 2x2 movement
+ball.dx = 0.1
+ball.dy = 0.1
+
+# Score
+score_1 = 0
+score_2 = 0
 
 # Scoreboard
 score = turtle.Turtle()
@@ -56,31 +55,27 @@ score.write("Player 1: {}  Player 2: {}".format(score_1, score_2), align="center
 # Player Movements
 def player1_up():
     y = player1.ycor()
-    if y < 250:
+    if y < 240:  # limit the paddle movement within the screen bounds
         y += 20
-    player1.sety(y)
+        player1.sety(y)
 
 def player1_down():
     y = player1.ycor()
-    if y > -250:
+    if y > -240:  # limit the paddle movement within the screen bounds
         y -= 20
-    player1.sety(y)
+        player1.sety(y)
 
 def player2_up():
     y = player2.ycor()
-    if y < 250:
+    if y < 240:  # limit the paddle movement within the screen bounds
         y += 20
-    player2.sety(y)
+        player2.sety(y)
 
 def player2_down():
     y = player2.ycor()
-    if y > -250:
+    if y > -240:  # limit the paddle movement within the screen bounds
         y -= 20
-    player2.sety(y)
-
-
-# Ball movement
-
+        player2.sety(y)
 
 # Keyboard controls
 wn.listen()

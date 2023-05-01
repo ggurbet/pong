@@ -56,23 +56,28 @@ score.write("Player 1: {}  Player 2: {}".format(score_1, score_2), align="center
 # Player Movements
 def player1_up():
     y = player1.ycor()
-    y += 20
+    if y < 250:
+        y += 20
     player1.sety(y)
 
 def player1_down():
     y = player1.ycor()
-    y -= 20
+    if y > -250:
+        y -= 20
     player1.sety(y)
 
 def player2_up():
     y = player2.ycor()
-    y += 20
+    if y < 250:
+        y += 20
     player2.sety(y)
 
 def player2_down():
     y = player2.ycor()
-    y -= 20
+    if y > -250:
+        y -= 20
     player2.sety(y)
+
 
 # Ball movement
 

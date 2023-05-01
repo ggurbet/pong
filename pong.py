@@ -40,6 +40,21 @@ ball.goto(0, 0)
 ball.dx = 0.1
 ball.dy = 0.1
 
+# Center line
+center_line = turtle.Turtle()
+center_line.speed(0)
+center_line.color("#666666")
+center_line.penup()
+center_line.goto(0, 400)
+center_line.pendown()
+center_line.pensize(3)
+center_line.setheading(270)
+while center_line.ycor() > -400:
+    center_line.fd(20)
+    center_line.penup()
+    center_line.fd(20)
+    center_line.pendown()
+
 # Score
 score_1 = 0
 score_2 = 0
@@ -84,9 +99,21 @@ wn.onkeypress(player1_down, "s")
 wn.onkeypress(player2_up, "Up")
 wn.onkeypress(player2_down, "Down")
 
+# Reset game
+def reset_game():
+    global score_1, score_2
+    score_1 = 0
+    score_2 = 0
+    ball.goto(0, 0)
+    player1.goto(-350, 0)
+    player2.goto(350, 0)
+    score.clear()
+    score.write("Player 1: {}  Player 2: {}".format(score_1, score_2), align="center", font=("Courier", 24, "normal"))
+
 # Main loop
 while True:
     wn.update()
+
     # Move the ball
     ball.setx(ball.xcor() + ball.dx)
     ball.sety(ball.ycor() + ball.dy)
@@ -124,3 +151,19 @@ while True:
         ball.ycor() > player1.ycor() - 50):
         ball.dx *= -1
         ball.setx(-340)
+
+    # Check if game is over
+    if score_1 == 5 or score_2 == 5:
+        # Stop the ball
+        ball.setx(0)
+        ball.sety(0)
+
+        # Show Game Over screen
+        winner = "Player 1" if score_1 > score_2 else "Player 2"
+        end_text = "{} wins! Press Enter to play again".format(winner)
+        score.clear()
+        score.write(end_text, align="center", font=("Courier", 24, "normal"))
+        
+        wn.update()
+        wn.onkeypress(reset_game, "Return")
+        wn.listen()
